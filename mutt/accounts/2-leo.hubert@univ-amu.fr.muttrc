@@ -1,0 +1,43 @@
+# vim: filetype=neomuttrc
+# muttrc file for account leo.hubert@univ-amu.fr
+set realname = "Léo Hubert"
+set from = "leo.hubert@univ-amu.fr"
+set sendmail = "msmtp -a leo.hubert@univ-amu.fr"
+alias me Léo Hubert <leo.hubert@univ-amu.fr>
+set folder = "/Users/leo/.local/share/mail/leo.hubert@univ-amu.fr"
+set header_cache = /Users/leo/.cache/mutt-wizard/leo.hubert@univ-amu.fr/headers
+set message_cachedir = /Users/leo/.cache/mutt-wizard/leo.hubert@univ-amu.fr/bodies
+set mbox_type = Maildir
+set hostname = "univ-amu.fr"
+# source /usr/local/share/mutt-wizard/switch.muttrc
+set spoolfile = +INBOX
+set postponed = +Drafts
+set trash = +Trash
+set record = +Sent
+
+# Reset everything when switching account
+unmailboxes *
+unalternates *
+unset signature
+
+macro index o "<shell-escape>mbsync leo.hubert@univ-amu.fr<enter>" "run mbsync to sync leo.hubert@univ-amu.fr"
+
+mailboxes "=Archive" "=Calendar/Birthdays" "=Deleted Items" "=Drafts" "=INBOX" "=Journal" "=Junk Email" "=Notes" "=Outbox" "=Seminaires" "=Sent" "=Sent Items" "=Tasks"
+macro index,pager gi "<change-folder>=inbox<enter>" "go to inbox"
+macro index,pager Mi ";<save-message>=inbox<enter>" "move mail to inbox"
+macro index,pager ga ";<change-folder>=Archive<enter>" "go to Tous(archive)"
+macro index,pager Ma ";<save-message>=Archive<enter>" "move mail to Tous(archive)"
+macro index,pager Ci ";<copy-message>=inbox<enter>" "copy mail to inbox"
+set spoolfile = "+inbox"
+set record = "+sent"
+set postponed = "+Drafts"
+macro index,pager gs "<change-folder>=sent<enter>" "go to sent"
+macro index,pager Ms ";<save-message>=sent<enter>" "move mail to sent"
+macro index,pager Cs ";<copy-message>=sent<enter>" "copy mail to sent"
+macro index,pager gt "<change-folder>=trash<enter>" "go to trash"
+macro index,pager Mt ";<save-message>=trash<enter>" "move mail to trash"
+macro index,pager Ct ";<copy-message>=trash<enter>" "copy mail to trash"
+set trash = "+trash"
+macro index,pager gj "<change-folder>=Junk Email<enter>" "go to junk (unsolbox)"
+macro index,pager Mj ";<save-message>=Junk Email<enter>" "move mail to junk (unsolbox)"
+macro index,pager Cj ";<copy-message>=unsolbox<enter>" "copy mail to junk (unsolbox)"

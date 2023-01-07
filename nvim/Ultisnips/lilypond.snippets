@@ -1,0 +1,16 @@
+snippet staff "new Staff"
+\new Staff \with{
+	instrumentName = "$1"
+	shortInstrumentName = "$2"} <<
+	\new Voice = "$3" { \voice$4 } 
+>>
+$0
+endsnippet
+
+snippet rel "\relative"
+\relative{$0}
+endsnippet
+
+snippet tup "\tupplet"
+\tuplet $1 {$2} $0
+endsnippet

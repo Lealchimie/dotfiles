@@ -1,0 +1,17 @@
+# fast focus desktop
+cmd + ctrl + alt - c : yabai -m space --focus recent
+cmd + ctrl + alt - h : yabai -m space --focus prev
+cmd + ctrl + alt - l : yabai -m space --focus next
+cmd + ctrl + alt - 0x53 : yabai -m space --focus 1
+cmd + ctrl + alt - 0x54 : yabai -m space --focus 2
+cmd + ctrl + alt - 0x55 : yabai -m space --focus 3
+cmd + ctrl + alt - 0x56 : yabai -m space --focus 4
+cmd + ctrl + alt - 0x57 : yabai -m space --focus 5
+cmd + ctrl + alt - 0x58 : yabai -m space --focus 6
+cmd + ctrl + alt - 0x59 : yabai -m space --focus 7
+cmd + ctrl + alt - 0x60 : yabai -m space --focus 8
+cmd + ctrl + alt - 0x61: yabai -m space --focus 9
+cmd + ctrl + alt - 0x62: yabai -m space --focus 10
+
+# Mission control
+cmd + ctrl + alt - k : yabai -m space --toggle mission-control

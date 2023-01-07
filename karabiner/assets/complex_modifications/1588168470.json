@@ -1,0 +1,61 @@
+{
+  "title": "Général",
+  "rules": [
+    {
+      "description": "Correction for brackets leq, geq",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "non_us_backslash",
+            "modifiers": {
+              "mandatory": ["any"]
+            }
+          },
+          "to": [{
+              "key_code": "<",
+              "modifiers": []
+            }]
+        }
+      ]
+    },
+"title": "Ableton",
+  "rules": [
+    {
+      "description": "cmd + Vers maj vers cmd + option + B (navigateur)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "caps_lock",
+            "modifiers": {
+              "mandatory": ["any"]
+            }
+          },
+          "to": [{
+              "key_code": "b",
+              "modifiers": ["left_option", "left_command"]
+            }]
+        }
+      ]
+    },
+    {
+      "description": "² vers @",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "0x35",
+            "modifiers": {
+              "mandatory": ["any"]
+            }
+          },
+          "to": [{
+              "key_code": "0",
+              "modifiers": ["right_alt"]
+            }]
+        }
+      ]
+    }
+  ]
+}

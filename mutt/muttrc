@@ -1,0 +1,237 @@
+# vim: filetype=neomuttrc
+# source /usr/local/share/mutt-wizard/mutt-wizard.muttrc
+# Réglagles perso (base mutt-wizard)
+set sort=reverse-threads
+set sort_aux=last-date-received #Avec ce reglage : dans un thread, dernier message en bas.
+set collapse_all=yes
+set mailcap_path = /usr/local/share/mutt-wizard/mailcap:$mailcap_path
+set mime_type_query_command = "file --mime-type -b %s"
+set date_format="%d/%m/%y %k:%M"
+set index_format="%2C %Z %?X?A& ? %D %-15.15F %?M?(%M)->?%s"
+# set sort = 'reverse-date'
+set smtp_authenticators = 'gssapi:login'
+set query_command = "abook --mutt-query '%s'"
+set rfc2047_parameters = yes
+set sleep_time = 0		# Pause 0 seconds for informational messages
+set markers = no		# Disables the `+` displayed at line wraps
+set mark_old = no		# Unread mail stay unread until read
+set mime_forward = ask-no	# attachments are forwarded with mail
+set wait_key = no		# mutt won't ask "press key to continue"
+set fast_reply			# skip to compose when replying
+set fcc_attach			# save attachments with the body
+set forward_format = "Fwd: %s"	# format of subject when forwarding
+set forward_quote		# include message in forwards
+set reverse_name		# reply as whomever it was to
+set include			# include message in replies
+set mail_check=60 # to avoid lags using IMAP with some email providers (yahoo for example)
+auto_view text/html		# automatically show html (mailcap uses lynx)
+ignore *
+unignore from date to subject cc
+auto_view application/pgp-encrypted
+#set display_filter = "tac | sed '/\\\[-- Autoview/,+1d' | tac" # Suppress autoview messages.
+alternative_order text/plain text/enriched text/html
+bind index,pager <Esc>g noop
+bind index,pager <Esc>h noop
+bind index,pager <Esc>i noop
+bind index,pager <Esc>k noop
+bind index,pager <Esc>c noop
+bind index,pager <Esc>C noop
+bind index,pager <Esc>P noop
+bind index,pager <Esc>e noop
+bind index,pager <Esc>s noop
+bind index,pager <Esc>/ noop
+bind index,pager i noop
+bind index,pager g noop
+bind index,pager Q noop
+bind index,pager gg noop
+bind attach,compose l noop
+bind index \Cf noop
+bind attach g noop
+bind attach G noop
+#
+# General rebindings
+bind index j next-entry
+bind index J next-new-then-unread
+bind index k previous-entry
+bind index K previous-new-then-unread
+bind attach <return> view-mailcap
+bind attach l view-mailcap
+bind editor <space> noop
+bind index G last-entry
+bind index gg first-entry
+bind pager,attach h exit
+bind pager j next-line
+bind pager k previous-line
+bind pager l view-attachments
+bind index D delete-message
+bind index U undelete-message
+bind index L limit
+bind index h noop
+bind index l display-message
+bind index,query <space> tag-entry
+#bind browser h goto-parent
+macro browser h '<change-dir><kill-line>..<enter>' "Go to parent folder"
+# bind index,pager H view-raw-message # À quel moment je voudrais ça ? 
+bind browser l select-entry
+bind browser gg top-page
+bind browser G bottom-page
+bind index,pager,browser \Cd half-down
+bind index,pager,browser \Cu half-up
+bind index,pager S sync-mailbox
+bind index,pager R group-reply
+bind index \031 previous-undeleted	# Mouse wheel
+bind index \005 next-undeleted		# Mouse wheel
+bind pager \031 previous-line		# Mouse wheel
+bind pager \005 next-line		# Mouse wheel
+bind editor <Tab> complete-query
+bind pager gg top
+bind attach gg top-page
+bind pager G bottom
+bind attach G bottom-page
+bind index,pager,browser,attach p noop
+bind index <Return> sidebar-open
+
+#set crypt_autosign = yes
+#set crypt_opportunistic_encrypt = yes
+#set pgp_self_encrypt = yes
+#set pgp_default_key  = 'your@gpgemailaddre.ss'
+
+macro index,pager a "<enter-command>set my_pipe_decode=\$pipe_decode pipe_decode<return><pipe-message>abook --add-email<return><enter-command>set pipe_decode=\$my_pipe_decode; unset my_pipe_decode<return>" "add the sender address to abook"
+macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
+macro index O "<shell-escape>mbsync -a && notmuch new --quiet<enter>" "run mbsync to sync all mail"
+macro index \Cf "<enter-command>unset wait_key<enter><shell-escape>printf 'Enter a search term to find with notmuch: '; read x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;s/\^id:// for@a;$,=\"|\";print@a' | perl -le '@a=<>; chomp@a; s/\\+/\\\\+/ for@a;print@a' \`\"<enter>" "show only messages matching a notmuch pattern"
+macro index A "<limit>all\n" "show all messages (undo limit)"
+
+# Sidebar mappings
+set sidebar_visible = no
+set sidebar_width = 20
+set sidebar_short_path = yes
+set sidebar_next_new_wrap = yes
+set mail_check_stats
+set sidebar_format = '%D%?F? [%F]?%* %?N?%N/? %?S?%S?'
+bind index,pager \Ck sidebar-prev
+bind index,pager \Cj sidebar-next
+bind index,pager \Co sidebar-open
+bind index,pager \Cp sidebar-prev-new
+bind index,pager \Cn sidebar-next-new
+bind index,pager B sidebar-toggle-visible
+macro index,pager X "<pipe-message>ripmime -i - -d "
+# Sauvegarde toutes les pièces jointes d'un mail dans un dossier
+
+# Default index colors:
+color index yellow default '.*'
+color index_author red default '.*'
+color index_number white default
+color index_subject white default '.*'
+
+##Color threads when collapsed
+#color index cyan default "~v" 
+#color index_subject cyan default "~v"
+#color index_author red default "~v"
+
+#Color collapsed threads with unread message
+color index brightyellow default "~(~N)"
+color index_author red default "~(~N)"
+color index_subject brightyellow default "~(~N)"
+# Problème : tous les messages non lus sont considérés comme ~(~N)
+#Ok en le placant avant les règles new mail.
+#Encore un problème : quand on de-collapse une conversation contenant un message
+#non lu, tous les messages sont marqués non lus.
+
+# New mail is boldened:
+color index brightyellow default "~N"
+color index_author red default "~N"
+color index_subject brightyellow default "~N"
+
+# Flag
+color index red default '~F'
+color index_author red default '~F'
+color index_subject red default '~F'
+
+# Tagged mail is highlighted:
+color index white cyan "~T"
+color index_author white cyan "~T"
+color index_subject white cyan "~T"
+
+# Careful with tagged flagged messages: 
+color index brightred cyan "~T ~F"
+color index_author brightred cyan "~T ~F"
+color index_subject brightred cyan "~T ~F"
+
+# Other colors and aesthetic settings:
+mono bold bold
+mono underline underline
+mono indicator reverse
+mono error bold
+color normal default default
+color indicator black white
+color sidebar_highlight red default
+color sidebar_divider brightblack black
+color sidebar_flagged red black
+color sidebar_new green black
+color normal brightyellow default
+color error red default
+color tilde black default
+color message cyan default
+color markers red white
+color attachment white default
+color search brightmagenta default
+color status brightyellow black
+color hdrdefault brightgreen default
+color quoted green default
+color quoted1 blue default
+color quoted2 cyan default
+color quoted3 yellow default
+color quoted4 red default
+color quoted5 brightred default
+color signature brightgreen default
+color bold black default
+color underline black default
+color normal default default
+
+# Regex highlighting:
+color header blue default ".*"
+color header brightmagenta default "^(From)"
+color header brightcyan default "^(Subject)"
+color header brightwhite default "^(CC|BCC)"
+color body brightred default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # Email addresses
+color body brightblue default "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # URL
+color body green default "\`[^\`]*\`" # Green text between ` and `
+color body brightblue default "^# \.*" # Headings as bold blue
+color body brightcyan default "^## \.*" # Subheadings as bold cyan
+color body brightgreen default "^### \.*" # Subsubheadings as bold green
+color body yellow default "^(\t| )*(-|\\*) \.*" # List items as yellow
+color body brightcyan default "[;:][-o][)/(|]" # emoticons
+color body brightcyan default "[;:][)(|]" # emoticons
+color body brightcyan default "[ ][*][^*]*[*][ ]?" # more emoticon?
+color body brightcyan default "[ ]?[*][^*]*[*][ ]" # more emoticon?
+color body red default "(BAD signature)"
+color body cyan default "(Good signature)"
+color body brightblack default "^gpg: Good signature .*"
+color body brightyellow default "^gpg: "
+color body brightyellow red "^gpg: BAD signature from.*"
+mono body bold "^gpg: Good signature"
+mono body bold "^gpg: BAD signature from.*"
+color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+
+source /Users/leo/.config/mutt/accounts/1-leo.hubert@mailo.cat.muttrc
+
+macro index,pager i1 '<sync-mailbox><enter-command>source /Users/leo/.config/mutt/accounts/1-leo.hubert@mailo.cat.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to leo.hubert@mailo.cat"
+macro index,pager i2 '<sync-mailbox><enter-command>source /Users/leo/.config/mutt/accounts/2-leo.hubert@univ-amu.fr.muttrc<enter><change-folder>!<enter>;<check-stats>' "switch to leo.hubert@univ-amu.fr"
+
+macro compose ,m \
+"<enter-command>set pipe_decode<enter>\
+<pipe-message>pandoc -f gfm -t plain -o /tmp/msg.txt<enter>\
+<pipe-message>pandoc -s -f gfm -t html5 -o /tmp/msg.html<enter>\
+<enter-command>unset pipe_decode<enter>a^U/tmp/msg.txt\n^Da^U/tmp/msg.html\n^D^T^Utext/html; charset=utf-8\n=DTT&d^U\n" \
+"Convert markdown gfm to HTML and plain"
+
+# macro compose m \
+# "<enter-command>set pipe_decode<enter>\
+# <pipe-message>pandoc -f gfm -t plain -o /tmp/msg.txt<enter>\
+# <pipe-message>pandoc -s -f gfm --self-contained -o /tmp/msg.html --resource-path /mutt/templates/ --template email<enter>\
+# <enter-command>unset pipe_decode<enter>\
+# <attach-file>/tmp/msg.txt<enter>\
+# <attach-file>/tmp/msg.html<enter>\
+# <tag-entry><previous-entry><tag-entry><group-alternatives>" \
+# "Convert markdown to HTML5 and plaintext alternative content types"

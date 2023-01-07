@@ -1,0 +1,53 @@
+Create Both
+
+IMAPStore leo.hubert@mailo.cat-remote
+Host mail.mailo.com
+Port 993
+User leo.hubert@mailo.cat
+PassCmd "security find-internet-password -a leo.hubert@mailo.cat -w"
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /etc/ssl/cert.pem
+
+MaildirStore leo.hubert@mailo.cat-local
+Subfolders Verbatim
+Path /Users/leo/.local/share/mail/leo.hubert@mailo.cat/
+Inbox /Users/leo/.local/share/mail/leo.hubert@mailo.cat/INBOX
+
+Channel leo.hubert@mailo.cat
+Expunge Both
+Far :leo.hubert@mailo.cat-remote:
+Near :leo.hubert@mailo.cat-local:
+Patterns * !"[Gmail]/All Mail"
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+# End profile
+
+IMAPStore leo.hubert@univ-amu.fr-remote
+Host imap.univ-amu.fr
+Port 993
+User leo.hubert@univ-amu.fr
+PassCmd "security find-internet-password -a leo.hubert@univ-amu.fr -w"
+AuthMechs LOGIN
+SSLType IMAPS
+PipelineDepth 1
+CertificateFile /etc/ssl/cert.pem
+
+MaildirStore leo.hubert@univ-amu.fr-local
+Subfolders Verbatim
+Path /Users/leo/.local/share/mail/leo.hubert@univ-amu.fr/
+Inbox /Users/leo/.local/share/mail/leo.hubert@univ-amu.fr/INBOX
+
+Channel leo.hubert@univ-amu.fr
+Expunge Both
+Far :leo.hubert@univ-amu.fr-remote:
+Near :leo.hubert@univ-amu.fr-local:
+Patterns * !"[Gmail]/All Mail"
+Create Both
+SyncState *
+MaxMessages 0
+ExpireUnread no
+# End profile
+
