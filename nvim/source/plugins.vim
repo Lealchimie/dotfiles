@@ -25,9 +25,9 @@ Plug 'vifm/vifm'
 Plug 'mhinz/vim-startify'
 " Plug 'justinmk/vim-sneak'
 Plug 'phaazon/hop.nvim'
-" Plug 'jakewvincent/mkdnflow.nvim'
+Plug 'jakewvincent/mkdnflow.nvim'
 " Plug 'neovimhaskell/haskell-vim'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'vimwiki/vimwiki'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/fzf'
@@ -54,4 +54,6 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-omni'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'aspeddro/pandoc.nvim'
+Plug 'folke/tokyonight.nvim'
+" Plug 'ixru/nvim-markdown'
 call plug#end()

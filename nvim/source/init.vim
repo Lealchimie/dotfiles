@@ -105,25 +105,25 @@ autocmd FileType mail set cursorline
 " Markdown
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd FileType markdown set cursorline
-autocmd FileType markdown set conceallevel=2
+" autocmd FileType markdown set conceallevel=2
 " autocmd FileType markdown set makeprg=silent! pandoc -f markdown -t pdf % %r.pdf " ça ne marche pas 
 " autocmd FileType markdown Goyo
 " let g:vim_markdown_folding_style_pythonic = 1
 " let g:vim_markdown_folding_disabled = 1
-" let g:vim_markdown_conceal = 2
+let g:vim_markdown_conceal = 2
 " let g:vim_markdown_math = 1
 " let g:vim_markdown_toml_frontmatter = 1
 " let g:vim_markdown_follow_anchor = 1
 " let g:vim_markdown_anchorexpr = "'<<'.v:anchor.'>>'"
 "____ Preview with Markdown-preview______________
-function! g:Open_browser(url)
-    " One of the following two lines:
-    silent exec '!Chromium --app=' . a:url
-    " silent exe 'silent !open -a "Chromium --app=" ' . a:url
-endfunction
-let g:mkdp_browserfunc = 'g:Open_browser'
-let g:mkdp_refresh_slow = 0
-let g:mkdp_browser=''
+" function! g:Open_browser(url)
+"     " One of the following two lines:
+"     silent exec '!Chromium --app=' . a:url
+"     " silent exe 'silent !open -a "Chromium --app=" ' . a:url
+" endfunction
+" let g:mkdp_browserfunc = 'g:Open_browser'
+" let g:mkdp_refresh_slow = 0
+" let g:mkdp_browser=''
 
 "Macros perso
 "map <F2> :w<CR>:!pdflatex %<CR><CR>

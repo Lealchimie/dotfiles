@@ -46,6 +46,7 @@ hyper - i : /Applications/Firefox.app/Contents/MacOS/firefox
 # yabai -m window --grid 4:4:1:1:2:2
 # 
 hyper - f : kitty -T Float zsh -c "vifm ~/Documents/Notes ~" 
+hyper - u : kitty -T Float nvim
 # hyper - n : /Applications/Alacritty.app/Contents/MacOS/alacritty -t Float-daily -e zsh -c "sh ~/Documents/Scripts/notes"
 hyper - n : kitty -T=Float zsh -c "sh ~/Documents/Scripts/notes"
 # hyper -f : \ 

@@ -98,7 +98,7 @@ require'nvim-treesitter.configs'.setup {
     -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
     -- the name of the parser)
     -- list of language that will be disabled
-    disable = {'latex'},
+    disable = {'latex', 'markdown'},
     -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
     -- disable = function(lang, buf)
     --     local max_filesize = 100 * 1024 -- 100 KB
@@ -182,7 +182,7 @@ cmp.setup({
         ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         ["<Tab>"] = cmp.mapping(
           function(fallback)
-            cmp_ultisnips_mappings.compose { "expand", "select_next_item" , "jump_forwards" }(fallback)
+            cmp_ultisnips_mappings.compose { "expand", "jump_forwards" , "select_next_item" }(fallback)
           end,
           { "i", "s", --[[ "c" (to enable the mapping in command mode) ]] }
         ),
@@ -253,3 +253,6 @@ end, {remap=true})
 
 -- Pandoc
 require('pandoc').setup()
+
+-- mkdnflow
+require('mkdnflow').setup()
