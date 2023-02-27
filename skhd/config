@@ -18,13 +18,23 @@ meh - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
 :: test : yabai -m config layout float; yabai -m config window_border off; yabai -m config top_padding 0; yabai -m config bottom_padding 0; yabai -m config left_padding 0; yabai -m config right_padding 0; yabai -m config window_gap 0;
 ## mode Logic 
 :: logic : yabai -m config layout float
+## mode move
+:: move : 
 # from 'default' mode, activate mode 'test'
 default < meh - m ; test
 # from 'test' mode, activate mode 'default'
 test < meh - m ; default
+# from default mode, activate mode 'move'
+default < meh - g ; move
+move < meh -g ; default
 # from default or test mode, activate 'logic'
 default < meh - 0x43 ; logic
 logic < meh - 0x43 ; default
+# mode numpad
+#
+::numpad : /Library/Application Support/org.pqrs/Karabiner-Elements/bin/karabiner_cli --select-profile '12345num'
+default, test < meh-n ; numpad
+numpad < meh-n ; default
 
 # shutdown lights
 # meh - l : killall limelight
@@ -80,6 +90,32 @@ shift + cmd - h : yabai -m window --warp west
 shift + cmd - j : yabai -m window --warp south
 shift + cmd - k : yabai -m window --warp north
 shift + cmd - l : yabai -m window --warp east
+
+# move mode
+# send window to desktop and follow focus
+move < c : yabai -m window --space recent; yabai -m space --focus recent ; skhd -k "meh-g"
+move < h : yabai -m window --space prev; yabai -m space --focus prev ; skhd -k "meh-g"
+move < l : yabai -m window --space next; yabai -m space --focus next ; skhd -k "meh-g"
+move < 0x53 : yabai -m window --space 1; yabai -m space --focus 1 ; skhd -k "meh-g"
+move < 0x12 : yabai -m window --space 1; yabai -m space --focus 1 ; skhd -k "meh-g"
+move < 0x54 : yabai -m window --space 2; yabai -m space --focus 2 ; skhd -k "meh-g"
+move < 0x13 : yabai -m window --space 2; yabai -m space --focus 2 ; skhd -k "meh-g"
+move < 0x55 : yabai -m window --space 3; yabai -m space --focus 3 ; skhd -k "meh-g"
+move < 0x14 : yabai -m window --space 3; yabai -m space --focus 3 ; skhd -k "meh-g"
+move < 0x56 : yabai -m window --space 4; yabai -m space --focus 4 ; skhd -k "meh-g"
+move < 0x15 : yabai -m window --space 4; yabai -m space --focus 4 ; skhd -k "meh-g"
+move < 0x57 : yabai -m window --space 5; yabai -m space --focus 5 ; skhd -k "meh-g"
+move < 0x17 : yabai -m window --space 5; yabai -m space --focus 5 ; skhd -k "meh-g"
+move < 0x58 : yabai -m window --space 6; yabai -m space --focus 6 ; skhd -k "meh-g"
+move < 0x16 : yabai -m window --space 6; yabai -m space --focus 6 ; skhd -k "meh-g"
+move < 0x59 : yabai -m window --space 7; yabai -m space --focus 7 ; skhd -k "meh-g"
+move < 0x1A : yabai -m window --space 7; yabai -m space --focus 7 ; skhd -k "meh-g"
+move < 0x5B : yabai -m window --space 8; yabai -m space --focus 8 ; skhd -k "meh-g"
+move < 0x1C : yabai -m window --space 8; yabai -m space --focus 8 ; skhd -k "meh-g"
+move < 0x5C : yabai -m window --space 9; yabai -m space --focus 9 ; skhd -k "meh-g"
+move < 0x19 : yabai -m window --space 9; yabai -m space --focus 9 ; skhd -k "meh-g"
+move < 0x1E : yabai -m window --space 10; yabai -m space --focus 10 ; skhd -k "meh-g"
+move < 0x4E : yabai -m window --space 10; yabai -m space --focus 10 ; skhd -k "meh-g"
 
 # increase window size with caps + =
 meh - 0x18 : yabai -m window --resize right:20:0 || yabai -m window --resize left:-20:0

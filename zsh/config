@@ -9,11 +9,11 @@ alias c="caldav 2>/dev/null 1>/tmp/lastcaldav && tail -n 2 /tmp/lastcaldav && ca
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/.local/bin/:$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
-export BROWSER=/Applications/Firefox.app/Contents/MacOs/firefox
+export BROWSER=/Applications/Librewolf.app/Contents/MacOs/librewolf
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/yabai-zsh-completions
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME

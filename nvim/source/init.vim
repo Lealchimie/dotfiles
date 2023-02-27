@@ -2,11 +2,19 @@ set nocompatible
 "leader : \ (alt + shift + / ) déjà localleader
 
 " General
-colorscheme gruvbox
+set termguicolors
+set background=dark
+let g:gruvbox_material_background = 'medium'
+let g:gruvbox_material_foreground = 'material'
+let g:gruvbox_material_enable_bold = 1
+let g:gruvbox_material_enable_italic = 1
+let g:gruvbox_material_better_performance = 1
+let g:gruvbox_material_dim_inactive_windows = 0
+
+colorscheme gruvbox-material
 set scrolloff=12
 syntax on
-set background=dark 
-highlight Comment cterm=italic
+" highlight Comment cterm=italic
 " hi! Normal ctermbg=NONE guibg=NONE 
 " hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE 
 filetype plugin on
@@ -46,7 +54,10 @@ runtime macros/sandwich/keymap/surround.vim " Utiliser les raccourcis surround"
 " map F <Plug>Sneak_S
 
 " VIMTEX"
+autocmd Filetype tex set conceallevel=2
 let g:vimtex_fold_enabled = 0
+let g:vimtex_fold_manual = 1
+set fillchars=fold:\ 
 let g:vimtex_view_method = 'zathura' 
 let g:vimtex_view_general_options = '-r @line @pdf @tex'
 let g:vimtex_format_enabled = 0
@@ -54,6 +65,20 @@ let g:vimtex_ident_enabled = 0
 let g:vimtex_view_automatic = 1
 let g:tex_flavor = 'latex'
 let g:vimtex_compiler_progname = 'nvr'
+let g:vimtex_syntax_conceal = {
+      \ 'accents': 1,
+      \ 'ligatures': 1,
+      \ 'cites': 1,
+      \ 'fancy': 1,
+      \ 'greek': 1,
+      \ 'math_bounds': 1,
+      \ 'math_delimiters': 1,
+      \ 'math_fracs': 1,
+      \ 'math_super_sub': 1,
+      \ 'math_symbols': 1,
+      \ 'sections': 1,
+      \ 'styles': 1,
+      \}
 let g:vimtex_quickfix_ignore_filters = [
       \ 'hyperref Warning',
       \]

@@ -473,3 +473,5 @@ nnoremap <c-f> :FZFfind<cr>
 
 nnoremap O :!open %c<cr>
 nnoremap ,a :!adb push %f /sdcard/
+
+command ln ln -s %f:p %D
